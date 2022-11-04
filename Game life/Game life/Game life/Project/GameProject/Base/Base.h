@@ -22,6 +22,9 @@ public:
 	int m_type;
 	//座標データ
 	CVector2D m_pos;
+	CVector2D m_pos_old;
+	//回転値
+	float m_ang;
 	//半径
 	float m_rad;
 	//移動ベクトル

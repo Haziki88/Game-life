@@ -12,7 +12,8 @@ private:
 	};
 	//ó‘Ô•Ï”
 	int m_state;
-
+	CVector2D m_mouse_pos;
+	CVector2D m_target_point;
 	CImage m_img;
 	bool	m_flip;
 	//’…’nƒtƒ‰ƒO
@@ -33,6 +34,7 @@ private:
 
 public:
 	Player(const CVector2D& p, bool flip);
+	~Player();
 	void Update();
 	void Draw();
 	void Collision(Base* b);

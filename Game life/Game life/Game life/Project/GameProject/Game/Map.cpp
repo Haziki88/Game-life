@@ -48,7 +48,7 @@ void Map::Draw()
 			//表示サイズ設定
 			m_img.SetSize(MAP_TIP_SIZE, MAP_TIP_SIZE);
 			//表示位置設定
-			m_img.SetPos(MAP_TIP_SIZE * j, MAP_TIP_SIZE * i);
+			m_img.SetPos(MAP_TIP_SIZE * j-m_scroll.x, MAP_TIP_SIZE * i-m_scroll.y);
 			//描画
 			m_img.Draw();
 		}
@@ -80,7 +80,7 @@ int Map::CollisionMap(const CVector2D& pos)
 {
 	//1点のみ検証
 	int t = GetTip(pos);
-	if (t != 0)return t;
+	if (t < 125)return t;
 	return 0;
 }
 
@@ -88,15 +88,15 @@ int Map::CollisionMap(const CVector2D& pos, const CRect& rect)
 {
 	//左上
 	int t = GetTip(CVector2D(pos.x + rect.m_left, pos.y + rect.m_top));
-	if (t != 0) return t;
+	if (t < 125) return t;
 	//右上
 	t = GetTip(CVector2D(pos.x + rect.m_right, pos.y + rect.m_top));
-	if (t != 0) return t;
+	if (t < 125) return t;
 	//左下
 	t = GetTip(CVector2D(pos.x + rect.m_left, pos.y + rect.m_bottom));
-	if (t != 0) return t;
+	if (t < 125) return t;
 	//右下
 	t = GetTip(CVector2D(pos.x + rect.m_right, pos.y + rect.m_bottom));
-	if (t != 0) return t;
+	if (t < 125) return t;
 	return 0;
 }

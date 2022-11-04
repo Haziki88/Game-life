@@ -3,6 +3,7 @@
 #include "Field.h"
 #include "Slash.h"
 #include "Effect.h"
+#include"Map.h"
 Player::Player(const CVector2D& p, bool flip) :
 	Base(eType_Player) {
 	//画像複製
@@ -10,7 +11,7 @@ Player::Player(const CVector2D& p, bool flip) :
 	//再生アニメーション設定
 	m_img.ChangeAnimation(0);
 	//座標設定
-	 m_pos = p;
+	m_pos_old=m_pos = p;
 	//中心位置設定
 	m_img.SetCenter(32, 32);
 	//矩形設定
@@ -29,29 +30,27 @@ Player::Player(const CVector2D& p, bool flip) :
 	m_hp = 100;
 
 
-}void Player::StateIdle()
+}
+Player::~Player()
+{
+}
+void Player::StateIdle()
 {
 	//移動量
-	const float move_speed = 6;
+	const float move_speed = 4;
 	//移動フラグ
 	bool move_flag = false;
 	//ジャンプ力
 	const float jump_pow = 12;
 
-	//左移動
-	if (HOLD(CInput::eLeft)) {
-		//移動量を設定
-		m_pos.x += -move_speed;
-		//反転フラグ
-		m_flip = true;
-		move_flag = true;
-	}
-	//右移動
-	if (HOLD(CInput::eRight)) {
-		//移動量を設定
-		m_pos.x += move_speed;
-		//反転フラグ
-		m_flip = false;
+	
+	//移動
+	if (HOLD(CInput::eMouseL)) {
+		CVector2D mousePos = CInput::GetMousePoint();
+		CVector2D vec = mousePos - m_pos;
+		m_ang = atan2(vec.x, vec.y);
+		CVector2D dir(sin(m_ang), cos(m_ang));
+		m_pos += dir * move_speed;
 		move_flag = true;
 	}
 	//ジャンプ
@@ -84,6 +83,7 @@ Player::Player(const CVector2D& p, bool flip) :
 	else
 	{
 		if (move_flag) {
+			
 			//走るアニメーション
 			m_img.ChangeAnimation(eAnimRun);
 		}
@@ -132,6 +132,7 @@ void Player::StateDown()
 	}
 }
 void Player::Update() {
+	m_pos_old = m_pos;
 	switch (m_state) {
 		//通常状態
 	case eState_Idle:
@@ -151,8 +152,8 @@ void Player::Update() {
 		break;
 	}
 	//落ちていたら落下中状態へ移行
-	if (m_is_ground && m_vec.y > GRAVITY * 4)
-		m_is_ground = false;
+	//if (m_is_ground && m_vec.y > GRAVITY * 4)
+		//m_is_ground = false;
 	//重力による落下
 	//m_vec.y += GRAVITY;
 	//m_pos += m_vec;
@@ -163,7 +164,7 @@ void Player::Update() {
 
 	//スクロール設定
 	m_scroll.x = m_pos.x - 1280 / 2;
-
+	m_scroll.y = m_pos.y - 500;
 }
 
 void Player::Draw() {
@@ -178,6 +179,28 @@ void Player::Draw() {
 void Player::Collision(Base* b)
 {
 	switch (b->m_type) {
+	case eType_Field:
+		if (Map* m = dynamic_cast<Map*>(b)) {
+			int t = m->CollisionMap(CVector2D(m_pos.x, m_pos_old.y), m_rect);
+			if (t != 0)
+				m_pos.x = m_pos_old.x;
+			t = m->CollisionMap(CVector2D(m_pos_old.x, m_pos.y), m_rect);
+			if (t != 0)
+				m_pos.y = m_pos_old.y;
+		}
+		break;
+		/*if (Map* m = dynamic_cast<Map*>(b)) {
+			int t = m->CollisionMap(CVector2D(m_pos.x, m_pos_old.y));
+			if (t != 0)
+				m_pos.x = m_pos_old.x;
+			t = m->CollisionMap(CVector2D(m_pos_old.x, m_pos.y));
+			if (t != 0) {
+				m_pos.y = m_pos_old.y;
+				m_vec.y = 0;
+				m_is_ground = true;
+			}
+		}
+		break;*/
 		//ゴール判定
 	/*case eType_Goal:
 		if (Base::CollisionRect(this, b)) {
@@ -205,10 +228,10 @@ void Player::Collision(Base* b)
 				//Base::Add(new Effect("Effect_Blood", m_pos + CVector2D(0, -64), m_flip));
 			}
 		}
-		break;
-	case eType_Field:
+		break;*/
+		
 		//Field型へキャスト、型変換できたら
-		if (Field* f = dynamic_cast<Field*>(b)) {
+		/*if (Field* f = dynamic_cast<Field*>(b)) {
 			//地面より下にいったら
 			if (m_pos.y > f->GetGroundY()) {
 				//地面の高さに戻す

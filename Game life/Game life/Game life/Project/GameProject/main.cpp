@@ -72,7 +72,8 @@ void Init(void)
 	ADD_RESOURCE("Trees", CImage::CreateImage("Image/dTiles.png"));
 	ADD_RESOURCE("TProps", CImage::CreateImage("Image/dTiles.png"));
 
-	Base::Add(new Player(CVector2D(200,300),false));
+
+	Base::Add(new Player(CVector2D(100,200),false));
 	Base::Add(new Enemy(CVector2D(300, 300), true));
 	Base::Add(new Map());
 
