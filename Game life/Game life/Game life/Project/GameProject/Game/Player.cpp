@@ -29,10 +29,12 @@ Player::Player(const CVector2D& p, bool flip) :
 	//
 	m_hp = 100;
 
+	m_path_idx = 0;
 
 }
 Player::~Player()
 {
+
 }
 void Player::StateIdle()
 {
@@ -45,14 +47,26 @@ void Player::StateIdle()
 
 	
 	//ˆÚ“®
-	if (HOLD(CInput::eMouseL)) {
+	if (PUSH(CInput::eMouseL)) {
 		CVector2D mousePos = CInput::GetMousePoint();
-		CVector2D vec = mousePos - m_pos;
-		m_ang = atan2(vec.x, vec.y);
-		CVector2D dir(sin(m_ang), cos(m_ang));
-		m_pos += dir * move_speed;
-		move_flag = true;
+		if (Map* m = dynamic_cast<Map*>(Base::FindObject(eType_Field))) {
+			m_path.FindShortestPath(m,GetScreenPos(m_pos), mousePos);
+			m_path_idx = 0;
+		}
 	}
+	if (m_path_idx < m_path.GetPathSize()) {
+		CVector2D vec = m_path.GetPathPoint(m_path_idx) - GetScreenPos(m_pos);
+		if (vec.Length() > 8) {
+			m_ang = atan2(vec.x, vec.y);
+			CVector2D dir(sin(m_ang), cos(m_ang));
+			GetScreenPos(m_pos) += dir * move_speed;
+			move_flag = true;
+		}
+		else {
+			m_path_idx++;
+		}
+	}
+	
 	//ƒWƒƒƒ“ƒv
 	/*if (m_is_ground && PUSH(CInput::eButton2)) {
 		m_vec.y = -jump_pow;
@@ -172,6 +186,11 @@ void Player::Draw() {
 	m_img.SetPos(GetScreenPos(m_pos));
 	//”½“]Ý’è
 	m_img.SetFlipH(m_flip);
+	m_path.Draw();
+	if (m_path.GetPathSize() > 0) {
+		Utility::DrawCircle(m_path.GetPathPoint(m_path.GetPathSize() - 1), 16, CVector4D(1, 0, 1, 1));
+	}
+	Utility::DrawCircle(GetScreenPos(m_pos), 16, CVector4D(1, 0, 0, 1));
 	//•`‰æ
 	m_img.Draw();
 	DrawRect();

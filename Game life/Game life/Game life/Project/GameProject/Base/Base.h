@@ -9,6 +9,7 @@ enum {
 	eType_Player_Attack,
 	eType_Enemy_Attack,
 	eType_Effect,
+	eType_Dijkstra,
 	eType_UI,
 	eType_Scene,
 };

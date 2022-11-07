@@ -1,5 +1,6 @@
 #pragma once
 #include "../Base/Base.h"
+#include"Dijkstra.h"
 
 class Player : public Base {
 private:
@@ -14,6 +15,7 @@ private:
 	int m_state;
 	CVector2D m_mouse_pos;
 	CVector2D m_target_point;
+	Dijkstra m_path;
 	CImage m_img;
 	bool	m_flip;
 	//着地フラグ
@@ -25,6 +27,8 @@ private:
 
 	int m_hp;
 
+
+	int m_path_idx;
 	//矩形
 	//各状態での挙動
 	void StateIdle();
