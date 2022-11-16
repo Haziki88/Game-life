@@ -29,6 +29,8 @@ Enemy::Enemy(const CVector2D& p, bool flip) :
 	m_attack_no = rand();
 	//ダメージ番号
 	m_attack_no = -1;
+	m_viewLength = 100.0f;
+	m_viewAngle = DtoR(45.0f);
 
 }void Enemy::StateIdle()
 {
@@ -181,6 +183,9 @@ void Enemy::Update() {
 }
 
 void Enemy::Draw() {
+	float alpha = 0.5f;
+	CVector4D color(0.0f, 1.0f, 0.0f, alpha);
+
 	//位置設定
 	m_img.SetPos(GetScreenPos(m_pos));
 	//反転設定

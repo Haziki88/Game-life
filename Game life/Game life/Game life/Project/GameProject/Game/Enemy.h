@@ -14,7 +14,12 @@ private:
 	//状態変数
 	int m_state;
 	int m_cnt;
-
+	//視野距離
+	float m_viewLength; 
+	//視野角度
+	float m_viewAngle;
+	//追跡中かどうか
+	bool m_isChase;
 	CImage m_img;
 	bool	m_flip;
 	//着地フラグ

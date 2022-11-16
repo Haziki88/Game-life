@@ -13,7 +13,7 @@ private:
 	};
 	//ó‘Ô•Ï”
 	int m_state;
-	CVector2D m_mouse_pos;
+	int m_cnt;
 	CVector2D m_target_point;
 	Dijkstra m_path;
 	CImage m_img;

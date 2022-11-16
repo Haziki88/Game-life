@@ -1,7 +1,7 @@
 #pragma once
 #include"../Base/Base.h"
 //マップの横のチップ数
-#define MAP_WIDTH    80
+#define MAP_WIDTH    73
 //マップの縦のチップ数
 #define MAP_HEIGHT   22
 //マップチップの大きさ

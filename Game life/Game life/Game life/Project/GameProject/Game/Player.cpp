@@ -47,19 +47,23 @@ void Player::StateIdle()
 
 	
 	//ˆÚ“®
-	if (PUSH(CInput::eMouseL)) {
-		CVector2D mousePos = CInput::GetMousePoint();
-		if (Map* m = dynamic_cast<Map*>(Base::FindObject(eType_Field))) {
-			m_path.FindShortestPath(m,GetScreenPos(m_pos), mousePos);
-			m_path_idx = 0;
+	if (--m_cnt <= 0) {
+		if (PUSH(CInput::eMouseL)) {
+			CVector2D mousePos = CInput::GetMousePoint()+m_scroll;
+			if (Map* m = dynamic_cast<Map*>(Base::FindObject(eType_Field))) {
+				m_path.FindShortestPath(m,m_pos, mousePos);
+				m_cnt = 60;
+				m_path_idx = 0;
+			}
 		}
 	}
+		
 	if (m_path_idx < m_path.GetPathSize()) {
-		CVector2D vec = m_path.GetPathPoint(m_path_idx) - GetScreenPos(m_pos);
+		CVector2D vec = m_path.GetPathPoint(m_path_idx) - m_pos;
 		if (vec.Length() > 8) {
 			m_ang = atan2(vec.x, vec.y);
 			CVector2D dir(sin(m_ang), cos(m_ang));
-			GetScreenPos(m_pos) += dir * move_speed;
+			m_pos += dir * move_speed;
 			move_flag = true;
 		}
 		else {
@@ -97,7 +101,6 @@ void Player::StateIdle()
 	else
 	{
 		if (move_flag) {
-			
 			//‘–‚éƒAƒjƒ[ƒVƒ‡ƒ“
 			m_img.ChangeAnimation(eAnimRun);
 		}
@@ -186,9 +189,9 @@ void Player::Draw() {
 	m_img.SetPos(GetScreenPos(m_pos));
 	//”½“]Ý’è
 	m_img.SetFlipH(m_flip);
-	m_path.Draw();
+	//m_path.Draw();
 	if (m_path.GetPathSize() > 0) {
-		Utility::DrawCircle(m_path.GetPathPoint(m_path.GetPathSize() - 1), 16, CVector4D(1, 0, 1, 1));
+		Utility::DrawCircle(GetScreenPos(m_path.GetPathPoint(m_path.GetPathSize() - 1)), 16, CVector4D(1, 0, 1, 1));
 	}
 	Utility::DrawCircle(GetScreenPos(m_pos), 16, CVector4D(1, 0, 0, 1));
 	//•`‰æ
