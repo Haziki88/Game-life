@@ -121,13 +121,13 @@ void Player::StateAttack()
 {
 	//攻撃アニメーションへ変更
 	m_img.ChangeAnimation(eAnimAttack01, false);
-	//3番目のパターンなら
-	//if (m_img.GetIndex() == 3) {
+	//2番目のパターンなら
+	//if (m_img.GetIndex() == 2) {
 		if (m_flip) {
-			Base::Add(new Slash(m_pos + CVector2D(-16, -16), m_flip, eType_Player_Attack, m_attack_no));
+			Base::Add(new Slash(m_pos + CVector2D(-32, -16), m_flip, eType_Player_Attack, m_attack_no));
 		}
 		else {
-			Base::Add(new Slash(m_pos + CVector2D(16, -16), m_flip, eType_Player_Attack, m_attack_no));
+			Base::Add(new Slash(m_pos + CVector2D(32, -16), m_flip, eType_Player_Attack, m_attack_no));
 		}
 	//}
 	//アニメーションが終了したら
