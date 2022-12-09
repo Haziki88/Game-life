@@ -2,10 +2,10 @@
 
 
 static TexAnim playerIdle[] = {
-	{ 0,4 },
-	{ 1,4 },
-	{ 2,4 },
-	{ 3,4 },
+	{ 0,6 },
+	{ 1,6 },
+	{ 2,6 },
+	{ 3,6 },
 	
 };
 static TexAnim playerRun[] = {
@@ -30,13 +30,10 @@ static TexAnim playerJumpDown[] = {
 
 };
 static TexAnim playerAttack01[] = {
-	{ 40,3 },
-	{ 41,3 },
-	{ 42,3 },
-	{ 43,2 },
-	{ 44,2 },
-	{ 45,3 },
-	{ 46,4 },
+	{ 18,3 },
+	{ 19,3 },
+	{ 20,3 },
+	{ 21,2 },
 };
 static TexAnim playerAttack01End[] = {
 	{ 48,4 },
