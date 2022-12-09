@@ -293,13 +293,13 @@ void Enemy::Collision(Base* b)
 {
 	switch (b->m_type) {
 	//攻撃エフェクトとの判定
-	/*case eType_Player_Attack:
+	case eType_Player_Attack:
 		//Slash型へキャスト、型変換できたら
 		if (Slash* s = dynamic_cast<Slash*>(b)) {
 			if (m_damage_no != s->GetAttackNo() && Base::CollisionRect(this, s)) {
 				//同じ攻撃の連続ダメージ防止
 				m_damage_no = s->GetAttackNo();
-				m_hp -= 50;
+				m_hp -= 30;
 				if (m_hp <= 0) {
 					m_state = eState_Down;
 				}
@@ -307,13 +307,13 @@ void Enemy::Collision(Base* b)
 					m_state = eState_Damage;
 
 				}
-				Base::Add(new Effect("Effect_Blood",
-					m_pos + CVector2D(0, -128), m_flip));
+				//Base::Add(new Effect("Effect_Blood",
+					//m_pos + CVector2D(0, -128), m_flip));
 
 				//Base::Add(new Effect("Effect_Blood", m_pos + CVector2D(0, -64), m_flip));
 			}
 		}
-		break;*/
+		break;
 	case eType_Field:
 		if (Map* m = dynamic_cast<Map*>(b)) {
 			int t = m->CollisionMap(CVector2D(m_pos.x, m_pos_old.y), m_rect);

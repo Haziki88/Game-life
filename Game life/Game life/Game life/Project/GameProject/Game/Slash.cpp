@@ -9,11 +9,11 @@ Slash::Slash(const CVector2D& pos, bool flip, int type, int attack_no) : Base(ty
 	//座標設定
 	m_pos = pos;
 	//表示サイズ設定
-	m_img.SetSize(128, 128);
+	m_img.SetSize(32, 32);
 	//中心位置設定
-	m_img.SetCenter(64, 64);
+	m_img.SetCenter(16, 16);
 	//当たり判定用矩形
-	m_rect = CRect(-64, -64, 64, 64);
+	m_rect = CRect(-16, -16, 16, 16);
 	//再生アニメーション設定(非ループ)
 	m_img.ChangeAnimation(0, false);
 	//攻撃番号
