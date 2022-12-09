@@ -45,7 +45,7 @@ void Player::StateIdle()
 	//ƒWƒƒƒ“ƒv—Í
 	const float jump_pow = 12;
 
-	CVector2D mousePos = CInput::GetMousePoint() + m_scroll;
+	CVector2D mousePos = CInput::GetMousePoint() + (CVector2D(m_scroll.x,m_scroll.y));
 	if (mousePos.x > m_pos.x) {
 		m_flip = false;
 	}
