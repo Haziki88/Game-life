@@ -45,11 +45,16 @@ void Player::StateIdle()
 	//ジャンプ力
 	const float jump_pow = 12;
 
-	
+	CVector2D mousePos = CInput::GetMousePoint() + m_scroll;
+	if (mousePos.x > m_pos.x) {
+		m_flip = false;
+	}
+	else if(mousePos.x<m_pos.x) {
+		m_flip = true;
+	}
 	//移動
 	if (--m_cnt <= 0) {
 		if (PUSH(CInput::eMouseL)) {
-			CVector2D mousePos = CInput::GetMousePoint()+m_scroll;
 			if (Map* m = dynamic_cast<Map*>(Base::FindObject(eType_Field))) {
 				m_path.FindShortestPath(m,m_pos, mousePos);
 				m_cnt = 60;
@@ -78,17 +83,16 @@ void Player::StateIdle()
 	}*/
 
 	//攻撃
-	if (PUSH(CInput::eButton1)) {
 		//攻撃状態へ移行
 
 	//攻撃
-		if (PUSH(CInput::eButton1)) {
-			//攻撃状態へ移行
-			m_state = eState_Attack;
-			m_attack_no++;
-		}
+	if (PUSH(CInput::eMouseR)) {
+		//攻撃状態へ移行
+		m_state = eState_Attack;
+		m_attack_no++;
+	}
 
-	}//ジャンプ中なら
+	//ジャンプ中なら
 	if (!m_is_ground) {
 		/*if (m_vec.y < 0)
 			//上昇アニメーション
@@ -118,14 +122,14 @@ void Player::StateAttack()
 	//攻撃アニメーションへ変更
 	m_img.ChangeAnimation(eAnimAttack01, false);
 	//3番目のパターンなら
-	/*if (m_img.GetIndex() == 3) {
+	//if (m_img.GetIndex() == 3) {
 		if (m_flip) {
-			Base::Add(new Slash(m_pos + CVector2D(-64, -64), m_flip, eType_Player_Attack, m_attack_no));
+			Base::Add(new Slash(m_pos + CVector2D(-16, -16), m_flip, eType_Player_Attack, m_attack_no));
 		}
 		else {
-			Base::Add(new Slash(m_pos + CVector2D(64, -64), m_flip, eType_Player_Attack, m_attack_no));
+			Base::Add(new Slash(m_pos + CVector2D(16, -16), m_flip, eType_Player_Attack, m_attack_no));
 		}
-	}*/
+	//}
 	//アニメーションが終了したら
 	if (m_img.CheckAnimationEnd()) {
 		//通常状態へ移行

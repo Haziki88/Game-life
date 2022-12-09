@@ -20,6 +20,9 @@
     <ClCompile Include="Game\Dijkstra.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\GC1\Game life\Game life\Game life\Project\GameProject\Game\Slash.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
@@ -49,6 +52,9 @@
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\Dijkstra.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\GC1\Game life\Game life\Game life\Project\GameProject\Game\Slash.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>

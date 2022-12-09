@@ -42,4 +42,7 @@ public:
 	void Update();
 	void Draw();
 	void Collision(Base* b);
+	const CVector2D& GetPos() const {
+		return m_pos;
+	}
 };
