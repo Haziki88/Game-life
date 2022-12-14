@@ -13,9 +13,9 @@ Player::Player(const CVector2D& p, bool flip) :
 	//座標設定
 	m_pos_old=m_pos = p;
 	//中心位置設定
-	m_img.SetCenter(48, 52);
+	m_img.SetCenter(44, 54);
 	//矩形設定
-	m_rect = CRect(-16, -32, 16, 0);
+	m_rect = CRect(-9, -28, 9, 0);
 	//反転フラグ
 	m_flip = flip;
 	//通常状態へ
@@ -45,7 +45,7 @@ void Player::StateIdle()
 	//ジャンプ力
 	const float jump_pow = 12;
 
-	CVector2D mousePos = CInput::GetMousePoint() + (CVector2D(m_scroll.x,m_scroll.y));
+	CVector2D mousePos = CInput::GetMousePoint() + m_scroll;
 	if (mousePos.x > m_pos.x) {
 		m_flip = false;
 	}

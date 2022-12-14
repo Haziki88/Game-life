@@ -74,8 +74,8 @@ void Init(void)
 	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Effect_Slash.png", effect_slash_anim_data, 128, 128));
 
 	Base::Add(new Map(2));
-	Base::Add(new Player(CVector2D(100,200),false));
-	Base::Add(new Enemy(CVector2D(400, 500), true));
+	Base::Add(new Player(CVector2D(300,200),false));
+	Base::Add(new Enemy(CVector2D(400, 300), true));
 	
 
 
