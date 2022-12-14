@@ -10,8 +10,9 @@
 class Map : public Base {
 private:
 	CImage m_img;
+	int m_stagedata[MAP_HEIGHT][MAP_WIDTH];
 public:
-	Map();
+	Map(int stage);
 	void Draw();
 	//指定座標のチップ番号を取得
 	int GetTip(const CVector2D& pos);
