@@ -1,8 +1,9 @@
 #pragma once
 #include "../Base/Base.h"
 #include"Dijkstra.h"
-
+class Child;
 class Player : public Base {
+	std::list<Child*> m_childs;
 private:
 	//状態
 	enum {														
@@ -42,6 +43,15 @@ public:
 	void Update();
 	void Draw();
 	void Collision(Base* b);
+	/// <summary>
+	/// リストから子を外す
+	/// </summary>
+	/// <param name="c">外す子</param>
+	void EraseChild(Child* c);
+	/// <summary>
+	/// リストから全ての子を外す
+	/// </summary>
+	void EraseAllChild();
 	const CVector2D& GetPos() const {
 		return m_pos;
 	}

@@ -4,6 +4,7 @@
 #include "Slash.h"
 #include "Effect.h"
 #include"Map.h"
+#include"Child.h"
 Player::Player(const CVector2D& p, bool flip) :
 	Base(eType_Player) {
 	//画像複製
@@ -28,7 +29,7 @@ Player::Player(const CVector2D& p, bool flip) :
 	m_damage_no = -1;
 	//
 	m_hp = 100;
-
+	m_rad = 32.0f;
 	m_path_idx = 0;
 
 }
@@ -215,6 +216,15 @@ void Player::Collision(Base* b)
 				m_pos.y = m_pos_old.y;
 		}
 		break;
+	case eType_Child:
+		if (Base::CollisionCircle(this, b)) {
+			if (Child* c = dynamic_cast<Child*>(b)) {
+				if (!c->m_parent) {
+					c->m_parent = this;
+					m_childs.push_back(c);
+				}
+			}
+		}
 		/*if (Map* m = dynamic_cast<Map*>(b)) {
 			int t = m->CollisionMap(CVector2D(m_pos.x, m_pos_old.y));
 			if (t != 0)
@@ -271,6 +281,26 @@ void Player::Collision(Base* b)
 		break;*/
 	}
 
+}
+
+void Player::EraseChild(Child* c)
+{
+	//リストから子を検索
+	auto it = std::find(m_childs.begin(), m_childs.end(), c);
+	//子　親を解除
+	(*it)->m_parent = nullptr;
+	m_childs.erase(it);
+}
+
+void Player::EraseAllChild()
+{
+	//先頭から末尾までのループ(削除するたびitが変わるので、it++はしない)
+	for (auto it = m_childs.begin(); it != m_childs.end();/*it++*/) {
+		//	子　親を解除
+		(*it)->m_parent = nullptr;
+		//親　子をリストから外す
+		it = m_childs.erase(it);
+	}
 }
 
 

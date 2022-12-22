@@ -12,6 +12,8 @@ enum {
 	eType_Dijkstra,
 	eType_UI,
 	eType_Scene,
+	eType_Parent,
+	eType_Child,
 };
 
 

@@ -14,6 +14,7 @@
 #include"Game/Player.h"
 #include"Game/Enemy.h"
 #include"Game/Map.h"
+#include"Game/Child.h"
 
 
 
@@ -76,6 +77,7 @@ void Init(void)
 	Base::Add(new Map(2));
 	Base::Add(new Player(CVector2D(300,200),false));
 	Base::Add(new Enemy(CVector2D(400, 300), true));
+	Base::Add(new Child(CVector2D(600,200)));
 	
 
 
