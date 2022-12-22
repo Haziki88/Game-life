@@ -68,6 +68,7 @@ void Init(void)
 	//-----------------------------------------------------
 	ADD_RESOURCE("Knight", CImage::CreateImage("Image/Knight.png", player_anim_data, 96, 64));
 	ADD_RESOURCE("Enemysukebase", CImage::CreateImage("Image/Enemysukebase.png", enemy_anim_data, 64, 64));
+	ADD_RESOURCE("Wizzard", CImage::CreateImage("Image/Wizzard.png", child_anim_data, 64, 64));
 	ADD_RESOURCE("dTiles", CImage::CreateImage("Image/dTiles.png"));
 	ADD_RESOURCE("Tiles", CImage::CreateImage("Image/Tiles.png"));
 	ADD_RESOURCE("Trees", CImage::CreateImage("Image/dTiles.png"));

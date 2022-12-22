@@ -28,7 +28,6 @@ private:
 
 	int m_hp;
 
-
 	int m_path_idx;
 	//‹éŒ`
 	//Šeó‘Ô‚Å‚Ì‹““®
@@ -55,4 +54,5 @@ public:
 	const CVector2D& GetPos() const {
 		return m_pos;
 	}
+	
 };

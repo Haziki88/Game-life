@@ -347,7 +347,33 @@ TexAnimData enemy_anim_data[] = {
 	ANIMDATA(enemyExtAttack01End),
 };
 
-
+static TexAnim childIdle[] = {
+	{ 0,2 },
+	{ 1,2 },
+	{ 2,2 },
+	{ 3,2 },
+};
+static TexAnim childRun[] = {
+	{ 6,5 },
+	{ 7,5 },
+	{ 8,5 },
+	{ 9,5 },
+	{ 10,5 },
+	{ 11,5 },
+};
+static TexAnim childDeth[] = {
+	{ 13,4 },
+	{ 14,4 },
+	{ 15,8 },
+	{ 16,4 },
+	{ 17,4 },
+	{ 18,4 },
+};
+TexAnimData child_anim_data[] = {
+	ANIMDATA(childIdle),
+	ANIMDATA(childRun),
+	ANIMDATA(childDeth),
+};
 
 
 static TexAnim _effect_blood[] = {
