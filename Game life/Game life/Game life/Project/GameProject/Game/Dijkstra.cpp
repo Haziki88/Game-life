@@ -16,7 +16,7 @@ Dijkstra::~Dijkstra()
 bool Dijkstra::_FindShorttestPath(Map* map, int x, int y, unsigned char score)
 {
 	//•Ç‚È‚ç’²‚×‚È‚¢
-	if (map->GetTip(x, y) < 123) return false;
+	if (map->GetTip(x, y) != NULL_TIP) return false;
 	//Šù‚ÉÅ’Z‹——£‚ÌŒo˜H‚ª‚ ‚ê‚Î’²‚×‚È‚¢
 	if (m_score[y][x] <= score) return false;
 	//‹——£XV

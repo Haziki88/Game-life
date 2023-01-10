@@ -69,13 +69,10 @@ void Init(void)
 	ADD_RESOURCE("Knight", CImage::CreateImage("Image/Knight.png", player_anim_data, 96, 64));
 	ADD_RESOURCE("Enemysukebase", CImage::CreateImage("Image/Enemysukebase.png", enemy_anim_data, 64, 64));
 	ADD_RESOURCE("Wizzard", CImage::CreateImage("Image/Wizzard.png", child_anim_data, 64, 64));
-	ADD_RESOURCE("dTiles", CImage::CreateImage("Image/dTiles.png"));
-	ADD_RESOURCE("Tiles", CImage::CreateImage("Image/Tiles.png"));
-	ADD_RESOURCE("Trees", CImage::CreateImage("Image/dTiles.png"));
-	ADD_RESOURCE("TProps", CImage::CreateImage("Image/dTiles.png"));
+	ADD_RESOURCE("dTiles", CImage::CreateImage("Image/dTiles.bmp"));
 	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Effect_Slash.png", effect_slash_anim_data, 128, 128));
 
-	Base::Add(new Map(2));
+	Base::Add(new Map(1, CVector2D(300, 200)));
 	Base::Add(new Player(CVector2D(300,200),false));
 	Base::Add(new Enemy(CVector2D(400, 300), true));
 	Base::Add(new Child(CVector2D(600,200)));

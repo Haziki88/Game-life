@@ -14,6 +14,7 @@ enum {
 	eType_Scene,
 	eType_Parent,
 	eType_Child,
+	eType_AreaChange,
 };
 
 
