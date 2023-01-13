@@ -95,6 +95,15 @@ void Base::KillAll()
 		b->m_kill = true;
 	}
 }
+void Base::KillByType(int type)
+{
+	//w’è‚Ìí—Ş‚ğ‘S‚Äíœ
+	std::list<Base*> ret;
+	for (auto& b : m_list) {
+		if (b->m_type == type)
+			b->SetKill();
+	}
+}
 bool Base::CollisionCircle(Base* b1, Base* b2)
 {
 	CVector2D v = b1->m_pos - b2->m_pos;

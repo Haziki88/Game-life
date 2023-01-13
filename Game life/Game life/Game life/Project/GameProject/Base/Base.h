@@ -53,6 +53,13 @@ public:
 	virtual void Collision(Base* b);
 	//削除フラグON
 	void SetKill() { m_kill = true; }
+	/// <summary>
+	/// 座標の設定
+	/// </summary>
+	/// <param name="pos">座標</param>
+	void ResetPos(const CVector2D& pos) {
+		m_pos = m_pos_old = pos;
+	}
 	//全てのオブジェクトの更新
 	static void UpdateAll();
 	//全てのオブジェクトの描画
@@ -64,6 +71,11 @@ public:
 	//オブジェクトの追加
 	static void Add(Base* b);
 	static void KillAll();
+	/// <summary>
+	/// 指定した種類のオブジェクトを削除
+	/// </summary>
+	/// <param name="type">オブジェクトの種類</param>
+	static void KillByType(int type);
 	//円同士の衝突
 	static bool CollisionCircle(Base* b1, Base* b2);
 	//矩形同士の判定

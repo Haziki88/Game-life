@@ -1,5 +1,5 @@
 #include "Map.h"
-
+#include"AreaChange.h"
 
 
 Map::Map(int nextArea, const CVector2D& nextplayerpos) :Base(eType_Field)
@@ -11,10 +11,23 @@ Map::Map(int nextArea, const CVector2D& nextplayerpos) :Base(eType_Field)
 	switch (nextArea) {
 	case 1:
 		Open("Map/チュートリアル.fmf");
+		Base::Add(new AreaChange(2,					//次のマップの番号
+			CRect(m_fmfHeader.byChipWidth * 74,		//エリアチェンジの判定
+				m_fmfHeader.byChipHeight * 26,		//左上
+				m_fmfHeader.byChipWidth * 3,		//横サイズ
+				m_fmfHeader.byChipHeight * 3),		//縦サイズ
+			CVector2D(m_fmfHeader.byChipWidth * 74,	//次のマップの最初のプレイヤーの場所
+				m_fmfHeader.byChipHeight * 5)));
 		break;
 	case 2:
 		Open("Map/マップ1.fmf");
 		break;
+	}
+	if (Base* p = Base::FindObject(eType_Player)) {
+		p->ResetPos(nextplayerpos);
+	}
+	if (Base* c = Base::FindObject(eType_Child)) {
+		c->ResetPos(nextplayerpos);
 	}
 }
 
@@ -37,7 +50,7 @@ void Map::Draw()
 
 
 	//チップの数　一行１６列か　１行２５６列か
-	int s = pow( 25, (GetLayerBitCount() / 8));
+	int s = pow( 16, (GetLayerBitCount() / 8));
 
 	//表示範囲を限定　画面に移る範囲だけ描画
 	int col = CCamera::GetCurrent()->GetWhidth() / GetChipWidth() + 1;
@@ -56,6 +69,8 @@ void Map::Draw()
 
 	//レイヤー数だけ繰り返す k=1から始めると判定用の壁だけ表示される
 	for (int k = 0; k < GetLayerCount(); k++) {
+		m_map_tip[k].DrawBegin();
+		int s = m_map_tip[k].mp_texture->m_width / GetChipWidth();
 		//行と列の繰り返し
 		for (int j = sy; j < ey; j++) {
 			for (int i = sx; i < ex; i++) {
@@ -74,8 +89,10 @@ void Map::Draw()
 				m_map_tip[k].SetSize(m_fmfHeader.byChipWidth, m_fmfHeader.byChipHeight);
 				//表示
 				m_map_tip[k].Draw();
+				m_map_tip[k].DrawS();
 			}
 		}
+		m_map_tip[k].DrawEnd();
 	}
 }
 

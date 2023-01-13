@@ -29,6 +29,10 @@ private:
 	int m_hp;
 
 	int m_path_idx;
+	//エリアチェンジフラグ
+	bool m_enable_area_change;
+	//エリアチェンジオブジェクトに触れているフラグ
+	bool m_hit_area_change;
 	//矩形
 	//各状態での挙動
 	void StateIdle();
@@ -53,6 +57,12 @@ public:
 	void EraseAllChild();
 	const CVector2D& GetPos() const {
 		return m_pos;
+	}
+	int gethp() {
+		Base* player = Base::FindObject(eType_Player);
+		if (player) {
+			return m_hp;
+		}
 	}
 	
 };

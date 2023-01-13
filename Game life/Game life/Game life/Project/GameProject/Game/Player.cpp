@@ -5,6 +5,7 @@
 #include "Effect.h"
 #include"Map.h"
 #include"Child.h"
+#include"AreaChange.h"
 Player::Player(const CVector2D& p, bool flip) :
 	Base(eType_Player) {
 	//画像複製
@@ -187,6 +188,10 @@ void Player::Update() {
 	//スクロール設定
 	m_scroll.x = m_pos.x - 1280 / 2;
 	m_scroll.y = m_pos.y - 500;
+
+	if (!m_enable_area_change && !m_hit_area_change)
+		m_enable_area_change = true;
+	m_hit_area_change = false;
 }
 
 void Player::Draw() {
@@ -206,6 +211,25 @@ void Player::Draw() {
 void Player::Collision(Base* b)
 {
 	switch (b->m_type) {
+	case eType_AreaChange:
+		if (Base::CollisionRect(this, b)) {
+			//エリアチェンジに触れている
+			m_hit_area_change = true;
+			//エリアチェンジ可能なら
+			if (m_enable_area_change) {
+				if (AreaChange* a = dynamic_cast<AreaChange*>(b)) {
+					//マップとエリアチェンジオブジェクトを削除
+					KillByType(eType_Field);
+					KillByType(eType_AreaChange);
+					//次のマップを生成
+					Base::Add(new Map(a->m_nextArea, a->m_nextplayerpos));
+					//エリアチェンジ一時不許可
+					m_enable_area_change = false;
+				}
+			}
+		}
+
+		break;
 	case eType_Field:
 		if (Map* m = dynamic_cast<Map*>(b)) {
 			CVector2D v;
