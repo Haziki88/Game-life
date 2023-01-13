@@ -37,7 +37,7 @@ void Map::Draw()
 
 
 	//ƒ`ƒbƒv‚Ì”@ˆês‚P‚U—ñ‚©@‚Ps‚Q‚T‚U—ñ‚©
-	int s = pow(16, (GetLayerBitCount() / 8));
+	int s = pow( 25, (GetLayerBitCount() / 8));
 
 	//•\Ž¦”ÍˆÍ‚ðŒÀ’è@‰æ–Ê‚ÉˆÚ‚é”ÍˆÍ‚¾‚¯•`‰æ
 	int col = CCamera::GetCurrent()->GetWhidth() / GetChipWidth() + 1;
