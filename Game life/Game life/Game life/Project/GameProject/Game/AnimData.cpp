@@ -226,14 +226,11 @@ static TexAnim enemyJumpDown[] = {
 };
 
 static TexAnim enemyAttack01[] = {
-	{ 40,4 },
-	{ 41,4 },
-	{ 42,4 },
-	{ 43,8 },
-	{ 44,2 },
-	{ 45,3 },
-	{ 46,3 },
-	{ 47,3 },
+	{ 30,4 },
+	{ 31,4 },
+	{ 32,4 },
+	{ 33,8 },
+	
 };
 static TexAnim enemyAttack01End[] = {
 	{ 48,2 },

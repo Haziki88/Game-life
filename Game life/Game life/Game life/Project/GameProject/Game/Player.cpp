@@ -47,7 +47,7 @@ void Player::StateIdle()
 	//ジャンプ力
 	const float jump_pow = 12;
 
-	CVector2D mousePos = CInput::GetMousePoint() + m_scroll;
+	CVector2D mousePos = (CInput::GetMousePoint() + m_scroll-CVector2D(640,150))*m_scale;
 	if (mousePos.x > m_pos.x) {
 		m_flip = false;
 	}
@@ -55,15 +55,15 @@ void Player::StateIdle()
 		m_flip = true;
 	}
 	//移動
-	if (--m_cnt <= 0) {
+	
 		if (PUSH(CInput::eMouseL)) {
 			if (Map* m = dynamic_cast<Map*>(Base::FindObject(eType_Field))) {
 				m_path.FindShortestPath(m,m_pos, mousePos);
-				m_cnt = 60;
+				
 				m_path_idx = 0;
 			}
 		}
-	}
+	
 		
 	if (m_path_idx < m_path.GetPathSize()) {
 		CVector2D vec = m_path.GetPathPoint(m_path_idx) - m_pos;
@@ -186,8 +186,8 @@ void Player::Update() {
 	m_img.UpdateAnimation();
 
 	//スクロール設定
-	m_scroll.x = m_pos.x - 1280 / 2;
-	m_scroll.y = m_pos.y - 500;
+	/*m_scroll.x = m_pos.x - 1280 / 2;
+	m_scroll.y = m_pos.y - 500;*/
 
 	if (!m_enable_area_change && !m_hit_area_change)
 		m_enable_area_change = true;
@@ -206,7 +206,7 @@ void Player::Draw() {
 	Utility::DrawCircle(GetScreenPos(m_pos), 16, CVector4D(1, 0, 0, 1));
 	//描画
 	m_img.Draw();
-	DrawRect();
+	//DrawRect();
 }
 void Player::Collision(Base* b)
 {
@@ -267,7 +267,7 @@ void Player::Collision(Base* b)
 		if (Base::CollisionRect(this, b)) {
 			SetKill();
 		}
-		break;
+		break;*/
 		//攻撃エフェクトとの判定
 	case eType_Enemy_Attack:
 		//Slash型へキャスト、型変換できたら
@@ -283,13 +283,13 @@ void Player::Collision(Base* b)
 					m_state = eState_Damage;
 
 				}
-				Base::Add(new Effect("Effect_Blood",
-					m_pos + CVector2D(0, -64), m_flip));
+				//Base::Add(new Effect("Effect_Blood",
+					//m_pos + CVector2D(0, -64), m_flip));
 
 				//Base::Add(new Effect("Effect_Blood", m_pos + CVector2D(0, -64), m_flip));
 			}
 		}
-		break;*/
+		break;
 		
 		//Field型へキャスト、型変換できたら
 		/*if (Field* f = dynamic_cast<Field*>(b)) {

@@ -14,6 +14,8 @@ enum {
 	eType_Scene,
 	eType_Parent,
 	eType_Child,
+	eType_Canvas,
+	eType_Scroll,
 	eType_AreaChange,
 };
 
@@ -42,6 +44,7 @@ public:
 
 	//スクロール値
 	static CVector2D m_scroll;
+	static float m_scale;
 
 public:
 	static CVector2D GetScreenPos(const CVector2D& pos);

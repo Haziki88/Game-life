@@ -1,5 +1,6 @@
 #include "Base.h"
 std::list<Base*> Base::m_list;
+float Base::m_scale = 0.7;
 //スクロール値の定義
 CVector2D Base::m_scroll(0, 0);
 

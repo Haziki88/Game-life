@@ -111,7 +111,7 @@ void Enemy::StateIdle()
 	//if (--m_count <= 0) {
 	if (player) {
 		if (m_isChase) {
-			m_target_point = player->m_pos;
+			m_target_point = player->m_pos+CVector2D(16,0);
 				if (Map* m = dynamic_cast<Map*>(Base::FindObject(eType_Field))) {
 					m_path.FindShortestPath(m, m_pos , m_target_point);
 					m_path_idx = 2;
@@ -126,7 +126,13 @@ void Enemy::StateIdle()
 					}
 				else {
 						m_path_idx++;
+
 				}
+					if (player->m_pos.x > m_pos.x - 32 && player->m_pos.x < m_pos.x + 32
+						&& player->m_pos.y < m_pos.y + 32 && player->m_pos.y > m_pos.y - 32) {
+						m_state = eState_Attack;
+						m_attack_no++;
+					}
 			}
 		}
 		
@@ -151,6 +157,7 @@ void Enemy::StateIdle()
 					m_path_idx++;
 				}
 			}
+	
 		
 	}
 	
@@ -203,14 +210,14 @@ void Enemy::StateAttack()
 	//攻撃アニメーションへ変更
 	m_img.ChangeAnimation(eAnimAttack01, false);
 	//3番目のパターンなら
-	/*if (m_img.GetIndex() == 3) {
+	if (m_img.GetIndex() == 3) {
 		if (m_flip) {
-			Base::Add(new Slash(m_pos + CVector2D(-64, -64), m_flip, eType_Enemy_Attack, m_attack_no));
+			Base::Add(new Slash(m_pos + CVector2D(-32, -16), m_flip, eType_Enemy_Attack, m_attack_no));
 		}
 		else {
-			Base::Add(new Slash(m_pos + CVector2D(64, -64), m_flip, eType_Enemy_Attack, m_attack_no));
+			Base::Add(new Slash(m_pos + CVector2D(32, -16), m_flip, eType_Enemy_Attack, m_attack_no));
 		}
-	}*/
+	}
 	//アニメーションが終了したら
 	if (m_img.CheckAnimationEnd()) {
 		//通常状態へ移行
@@ -287,7 +294,7 @@ void Enemy::Draw() {
 	//描画
 	m_img.Draw();
 	//当たり判定矩形の表示
-	DrawRect();
+	//DrawRect();
 }
 void Enemy::Collision(Base* b)
 {

@@ -1,7 +1,7 @@
 //ゲーム係機能のインクルード
 #include <GLLibrary.h>
 #define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 1080
+#define SCREEN_HEIGHT 720
 
 
 
@@ -16,6 +16,8 @@
 #include"Game/Map.h"
 #include"Game/Child.h"
 #include"Game/UI.h"
+#include"Game/Scroll.h"
+#include"Game/Canvas.h"
 #include"Game/Game.h"
 
 
@@ -73,9 +75,11 @@ void Init(void)
 	ADD_RESOURCE("Wizzard", CImage::CreateImage("Image/Wizzard.png", child_anim_data, 64, 64));
 	ADD_RESOURCE("dTiles", CImage::CreateImage("Image/dTiles.bmp"));
 	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Effect_Slash.png", effect_slash_anim_data, 128, 128));
+	ADD_RESOURCE("chest_3", CImage::CreateImage("Image/chest_3.png"));
 
 	Base::Add(new Game());
-	
+	Base::Add(new Scroll(CVector2D(SCREEN_WIDTH, SCREEN_HEIGHT)));
+	Base::Add(new Canvas(CVector2D(SCREEN_WIDTH, SCREEN_HEIGHT)));
 
 
 }

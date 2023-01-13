@@ -1,5 +1,6 @@
 #include "Map.h"
 #include"AreaChange.h"
+#include"Goal.h"
 
 
 Map::Map(int nextArea, const CVector2D& nextplayerpos) :Base(eType_Field)
@@ -21,6 +22,7 @@ Map::Map(int nextArea, const CVector2D& nextplayerpos) :Base(eType_Field)
 		break;
 	case 2:
 		Open("Map/マップ1.fmf");
+		Base::Add(new Goal(CVector2D(100,300)));
 		break;
 	}
 	if (Base* p = Base::FindObject(eType_Player)) {
@@ -44,8 +46,8 @@ void Map::Draw()
 	//1Fのズレをなくすため、描画の直前でスクロール値確定
 	if (Base* p = Base::FindObject(eType_Player)) {
 		//スクロール設定
-		m_scroll.x = p->m_pos.x - 600;
-		m_scroll.y = p->m_pos.y - 500;
+		m_scroll.x = p->m_pos.x;
+		m_scroll.y = p->m_pos.y;
 	}
 
 
@@ -56,12 +58,24 @@ void Map::Draw()
 	int col = CCamera::GetCurrent()->GetWhidth() / GetChipWidth() + 1;
 	int row = CCamera::GetCurrent()->GetHeight() / GetChipHeight() + 1;
 
-	int sx = m_scroll.x / GetChipWidth();
+	/*int sx = m_scroll.x / GetChipWidth();
 	if (sx < 0) sx = 0;
 	int ex = sx + col;
 	if (ex > GetMapWidth())ex = GetMapWidth();
 
 	int sy = m_scroll.y / GetChipHeight();
+	if (sy < 0) sy = 0;
+	int ey = sy + row;
+	if (ey > GetMapHeight())ey = GetMapHeight();*/
+
+	//画面の拡大縮小プログラムを実装している場合（Scroll.cpp）
+	//②拡大縮小：画面中心が原点
+	int sx = m_scroll.x / 16 - col / 2;
+	if (sx < 0) sx = 0;
+	int ex = sx + col;
+	if (ex > GetMapWidth())ex = GetMapWidth();
+
+	int sy = m_scroll.y / 16 - row / 2;
 	if (sy < 0) sy = 0;
 	int ey = sy + row;
 	if (ey > GetMapHeight())ey = GetMapHeight();
