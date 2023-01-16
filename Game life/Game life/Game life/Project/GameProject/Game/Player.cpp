@@ -41,13 +41,13 @@ Player::~Player()
 void Player::StateIdle()
 {
 	//移動量
-	const float move_speed = 4;
+	const float move_speed = 3;
 	//移動フラグ
 	bool move_flag = false;
 	//ジャンプ力
 	const float jump_pow = 12;
 
-	CVector2D mousePos = (CInput::GetMousePoint() + m_scroll-CVector2D(640,150))*m_scale;
+	CVector2D mousePos = (CInput::GetMousePoint()-CVector2D(1280/2,720/2))*m_scale + m_scroll;
 	if (mousePos.x > m_pos.x) {
 		m_flip = false;
 	}
@@ -221,6 +221,7 @@ void Player::Collision(Base* b)
 					//マップとエリアチェンジオブジェクトを削除
 					KillByType(eType_Field);
 					KillByType(eType_AreaChange);
+					KillByType(eType_Enemy);
 					//次のマップを生成
 					Base::Add(new Map(a->m_nextArea, a->m_nextplayerpos));
 					//エリアチェンジ一時不許可
@@ -250,6 +251,7 @@ void Player::Collision(Base* b)
 				}
 			}
 		}
+		break;
 		/*if (Map* m = dynamic_cast<Map*>(b)) {
 			int t = m->CollisionMap(CVector2D(m_pos.x, m_pos_old.y));
 			if (t != 0)
@@ -263,11 +265,11 @@ void Player::Collision(Base* b)
 		}
 		break;*/
 		//ゴール判定
-	/*case eType_Goal:
+	case eType_Goal:
 		if (Base::CollisionRect(this, b)) {
 			SetKill();
 		}
-		break;*/
+		break;
 		//攻撃エフェクトとの判定
 	case eType_Enemy_Attack:
 		//Slash型へキャスト、型変換できたら
@@ -275,7 +277,7 @@ void Player::Collision(Base* b)
 			if (m_damage_no != s->GetAttackNo() && Base::CollisionRect(this, s)) {
 				//同じ攻撃の連続ダメージ防止
 				m_damage_no = s->GetAttackNo();
-				m_hp -= 50;
+				m_hp -= 25;
 				if (m_hp <= 0) {
 					m_state = eState_Down;
 				}

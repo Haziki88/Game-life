@@ -1,6 +1,7 @@
 #pragma once
 #include <GLLibrary.h>
 enum {
+	eType_Scroll,
 	eType_Field,
 	eType_Player,
 	eType_Enemy,
@@ -10,13 +11,12 @@ enum {
 	eType_Enemy_Attack,
 	eType_Effect,
 	eType_Dijkstra,
-	eType_UI,
-	eType_Scene,
 	eType_Parent,
 	eType_Child,
-	eType_Canvas,
-	eType_Scroll,
 	eType_AreaChange,
+	eType_Canvas,
+	eType_UI,
+	eType_Scene,
 };
 
 

@@ -1,6 +1,9 @@
 #include "Map.h"
 #include"AreaChange.h"
 #include"Goal.h"
+#include"Enemy.h"
+#include"Child.h"
+#include"Player.h"
 
 
 Map::Map(int nextArea, const CVector2D& nextplayerpos) :Base(eType_Field)
@@ -19,17 +22,33 @@ Map::Map(int nextArea, const CVector2D& nextplayerpos) :Base(eType_Field)
 				m_fmfHeader.byChipHeight * 3),		//縦サイズ
 			CVector2D(m_fmfHeader.byChipWidth * 74,	//次のマップの最初のプレイヤーの場所
 				m_fmfHeader.byChipHeight * 5)));
+		Base::Add(new Child(CVector2D(600, 200)));
+		Base::Add(new Player(CVector2D(70, 100), false));
+		Base::Add(new Enemy(CVector2D(300, 300), true));
+		Base::Add(new Enemy(CVector2D(900, 400), true));
+		Base::Add(new Enemy(CVector2D(650, 200), true));
+
 		break;
 	case 2:
 		Open("Map/マップ1.fmf");
-		Base::Add(new Goal(CVector2D(100,300)));
+		Base::Add(new Goal(CVector2D(100,400)));
+		Base::Add(new Child(CVector2D(1240, 350)));
+		Base::Add(new Child(CVector2D(100,100)));
+		Base::Add(new Enemy(CVector2D(300, 200), false));
+		Base::Add(new Enemy(CVector2D(300, 400), false));
+		Base::Add(new Enemy(CVector2D(600, 400), false));
+		Base::Add(new Enemy(CVector2D(1100, 320), true));
 		break;
 	}
 	if (Base* p = Base::FindObject(eType_Player)) {
 		p->ResetPos(nextplayerpos);
 	}
 	if (Base* c = Base::FindObject(eType_Child)) {
-		c->ResetPos(nextplayerpos);
+		if (Child* child = dynamic_cast<Child*>(c)) {
+			if (child->m_parent) {
+				c->ResetPos(nextplayerpos);
+			}
+		}
 	}
 }
 

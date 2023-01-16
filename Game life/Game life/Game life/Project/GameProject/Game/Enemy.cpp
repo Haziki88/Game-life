@@ -304,9 +304,11 @@ void Enemy::Collision(Base* b)
 		//Slash型へキャスト、型変換できたら
 		if (Slash* s = dynamic_cast<Slash*>(b)) {
 			if (m_damage_no != s->GetAttackNo() && Base::CollisionRect(this, s)) {
+				Base* player = Base::FindObject(eType_Player);
+				Player* p = dynamic_cast<Player*>(player);
 				//同じ攻撃の連続ダメージ防止
 				m_damage_no = s->GetAttackNo();
-				m_hp -= 30;
+				m_hp -= p->damage();
 				if (m_hp <= 0) {
 					m_state = eState_Down;
 				}

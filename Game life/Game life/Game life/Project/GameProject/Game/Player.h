@@ -64,5 +64,15 @@ public:
 			return m_hp;
 		}
 	}
+	int  damage() {
+		Base* player = Base::FindObject(eType_Player);
+		int d = 25;
+		for (auto v : m_childs) {
+			d += 10;
+		}
+		if (player) {
+			return d;
+		}
+	}
 	
 };

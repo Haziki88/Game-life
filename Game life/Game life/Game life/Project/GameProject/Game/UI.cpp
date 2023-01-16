@@ -15,7 +15,7 @@ void UI::Draw()
 	int h = 64 * p->gethp() / 158 + 18;
 	m_img.SetRect(64 * 0, 32, 64 * 0 + h, 64);
 	m_img.SetSize(h, 32);
-	m_img.SetPos(-430, -250);
+	m_img.SetPos(0, 0);
 	m_img.Draw();
 	
 

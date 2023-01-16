@@ -11,11 +11,9 @@
 
 Game::Game() :Base(eType_Scene)
 {
-	Base::Add(new Map(1, CVector2D(300, 200)));
+	Base::Add(new Map(1, CVector2D(70, 100)));
 	Base::Add(new UI());
-	Base::Add(new Player(CVector2D(70, 100), false));
-	Base::Add(new Enemy(CVector2D(400, 300), true));
-	Base::Add(new Child(CVector2D(600, 200)));
+	
 	
 
 
