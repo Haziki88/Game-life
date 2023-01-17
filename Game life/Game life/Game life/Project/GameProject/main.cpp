@@ -19,6 +19,7 @@
 #include"Game/Scroll.h"
 #include"Game/Canvas.h"
 #include"Game/Game.h"
+#include"Title/Title.h"
 
 
 
@@ -76,10 +77,12 @@ void Init(void)
 	ADD_RESOURCE("dTiles", CImage::CreateImage("Image/dTiles.bmp"));
 	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Effect_Slash.png", effect_slash_anim_data, 128, 128));
 	ADD_RESOURCE("chest_3", CImage::CreateImage("Image/chest_3.png"));
+	ADD_RESOURCE("Titlelife", CImage::CreateImage("Image/Titlelife.png"));
+	ADD_RESOURCE("Gameover", CImage::CreateImage("Image/Gameover.png"));
+	ADD_RESOURCE("towerED", CImage::CreateImage("Image/towerED.png"));
 
-	Base::Add(new Game());
-	Base::Add(new Scroll(CVector2D(SCREEN_WIDTH, SCREEN_HEIGHT)));
-	Base::Add(new Canvas(CVector2D(SCREEN_WIDTH, SCREEN_HEIGHT)));
+	Base::Add(new Title());
+	
 
 
 }

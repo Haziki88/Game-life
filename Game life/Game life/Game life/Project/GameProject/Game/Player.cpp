@@ -32,11 +32,10 @@ Player::Player(const CVector2D& p, bool flip) :
 	m_hp = 100;
 	m_rad = 32.0f;
 	m_path_idx = 0;
-
 }
 Player::~Player()
 {
-
+	EraseAllChild();
 }
 void Player::StateIdle()
 {
@@ -203,7 +202,7 @@ void Player::Draw() {
 	if (m_path.GetPathSize() > 0) {
 		Utility::DrawCircle(GetScreenPos(m_path.GetPathPoint(m_path.GetPathSize() - 1)), 16, CVector4D(1, 0, 1, 1));
 	}
-	Utility::DrawCircle(GetScreenPos(m_pos), 16, CVector4D(1, 0, 0, 1));
+	Utility::DrawCircle(GetScreenPos(m_pos), 16, CVector4D(0, 0, 1, 1));
 	//•`‰æ
 	m_img.Draw();
 	//DrawRect();
@@ -277,7 +276,7 @@ void Player::Collision(Base* b)
 			if (m_damage_no != s->GetAttackNo() && Base::CollisionRect(this, s)) {
 				//“¯‚¶UŒ‚‚Ì˜A‘±ƒ_ƒ[ƒW–hŽ~
 				m_damage_no = s->GetAttackNo();
-				m_hp -= 25;
+				m_hp -= 15;
 				if (m_hp <= 0) {
 					m_state = eState_Down;
 				}

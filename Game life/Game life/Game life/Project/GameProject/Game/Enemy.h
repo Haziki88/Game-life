@@ -35,7 +35,7 @@ private:
 	int m_attack_no;
 	//ダメージ番号
 	int m_damage_no;
-	int m_hp=150;
+	int m_hp=120;
 	int m_path_idx;
 
 	//各状態での挙動

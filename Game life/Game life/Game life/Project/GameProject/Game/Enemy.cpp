@@ -45,6 +45,7 @@ bool Enemy::IsFoundPlayer() const
 {
 	Base* p = Base:: FindObject(eType_Player);
 	Player* player = dynamic_cast<Player*>(p);
+	if(player){
 	CVector2D forward = GetForward();
 	CVector2D playervec = player->GetPos() - m_pos;
 	float angle = CVector2D::Dot(
@@ -58,6 +59,7 @@ bool Enemy::IsFoundPlayer() const
 		return false;
 	}
 	return true;
+	}
 }
 void Enemy::StateIdle()
 {
@@ -158,7 +160,16 @@ void Enemy::StateIdle()
 				}
 			}
 	
-		
+			if (player->m_pos.x < m_pos.x - 32) {
+				m_flip = true;
+				m_moveDir = CVector2D::left;
+			}
+			else 
+				if (player->m_pos.x > m_pos.x + 32) {
+					//”½“]ƒtƒ‰ƒO
+					m_flip = false;
+					m_moveDir = CVector2D::right;
+				}
 	}
 	
 		

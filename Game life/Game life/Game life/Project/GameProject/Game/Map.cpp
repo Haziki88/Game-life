@@ -15,6 +15,7 @@ Map::Map(int nextArea, const CVector2D& nextplayerpos) :Base(eType_Field)
 	switch (nextArea) {
 	case 1:
 		Open("Map/チュートリアル.fmf");
+		Base::Add(new Player(CVector2D(70, 100), false));
 		Base::Add(new AreaChange(2,					//次のマップの番号
 			CRect(m_fmfHeader.byChipWidth * 74,		//エリアチェンジの判定
 				m_fmfHeader.byChipHeight * 26,		//左上
@@ -23,7 +24,6 @@ Map::Map(int nextArea, const CVector2D& nextplayerpos) :Base(eType_Field)
 			CVector2D(m_fmfHeader.byChipWidth * 74,	//次のマップの最初のプレイヤーの場所
 				m_fmfHeader.byChipHeight * 5)));
 		Base::Add(new Child(CVector2D(600, 200)));
-		Base::Add(new Player(CVector2D(70, 100), false));
 		Base::Add(new Enemy(CVector2D(300, 300), true));
 		Base::Add(new Enemy(CVector2D(900, 400), true));
 		Base::Add(new Enemy(CVector2D(650, 200), true));
@@ -37,7 +37,7 @@ Map::Map(int nextArea, const CVector2D& nextplayerpos) :Base(eType_Field)
 		Base::Add(new Enemy(CVector2D(300, 200), false));
 		Base::Add(new Enemy(CVector2D(300, 400), false));
 		Base::Add(new Enemy(CVector2D(600, 400), false));
-		Base::Add(new Enemy(CVector2D(1100, 320), true));
+		Base::Add(new Enemy(CVector2D(1100, 350), true));
 		break;
 	}
 	if (Base* p = Base::FindObject(eType_Player)) {

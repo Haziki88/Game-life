@@ -12,6 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Base.cpp" />
+    <ClCompile Include="Gameclear\Gameclear.cpp" />
+    <ClCompile Include="Gameover\Gameover.cpp" />
     <ClCompile Include="Game\AnimData.cpp" />
     <ClCompile Include="Game\AreaChange.cpp" />
     <ClCompile Include="Game\Canvas.cpp" />
@@ -27,9 +29,12 @@
     <ClCompile Include="Game\Slash.cpp" />
     <ClCompile Include="Game\UI.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Title\Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Base.h" />
+    <ClInclude Include="Gameclear\Gameclear.h" />
+    <ClInclude Include="Gameover\Gameover.h" />
     <ClInclude Include="Game\AnimData.h" />
     <ClInclude Include="Game\AreaChange.h" />
     <ClInclude Include="Game\Canvas.h" />
@@ -44,6 +49,7 @@
     <ClInclude Include="Game\Scroll.h" />
     <ClInclude Include="Game\Slash.h" />
     <ClInclude Include="Game\UI.h" />
+    <ClInclude Include="Title\Title.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FE2CE3B1-49BF-46A5-9DB1-9BD5B52FE1A0}</ProjectGuid>

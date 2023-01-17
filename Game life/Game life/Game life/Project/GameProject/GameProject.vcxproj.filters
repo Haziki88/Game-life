@@ -47,6 +47,15 @@
     <ClCompile Include="Game\Scroll.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Title\Title.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameover\Gameover.cpp">
+      <Filter>Gameover</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameclear\Gameclear.cpp">
+      <Filter>Gameclear</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
@@ -57,6 +66,12 @@
     </Filter>
     <Filter Include="Title">
       <UniqueIdentifier>{ac4eba0d-09bc-4a65-9900-0c3615e1ea46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gameover">
+      <UniqueIdentifier>{cff746e3-ba7f-4f88-a044-4cfe5fda05fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gameclear">
+      <UniqueIdentifier>{c0537460-d3f7-4178-87a4-f0c2f7a7eda9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +119,15 @@
     </ClInclude>
     <ClInclude Include="Game\Scroll.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Title\Title.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameover\Gameover.h">
+      <Filter>Gameover</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameclear\Gameclear.h">
+      <Filter>Gameclear</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
