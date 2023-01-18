@@ -28,7 +28,7 @@ Game::~Game()
 	Base::KillAll();
 	//タイトルシーンへ
 	
-	if (m_clear_flag == true) {
+	if (clear_flag == true) {
 		Base::Add(new Gameclear());
 	}
 	else  {

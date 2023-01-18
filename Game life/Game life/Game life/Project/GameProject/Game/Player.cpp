@@ -6,6 +6,7 @@
 #include"Map.h"
 #include"Child.h"
 #include"AreaChange.h"
+#include"Game.h"
 Player::Player(const CVector2D& p, bool flip) :
 	Base(eType_Player) {
 	//‰æ‘œ•¡»
@@ -266,6 +267,9 @@ void Player::Collision(Base* b)
 		//ƒS[ƒ‹”»’è
 	case eType_Goal:
 		if (Base::CollisionRect(this, b)) {
+			Base* game = Base::FindObject(eType_Scene);
+			Game* g = dynamic_cast<Game*>(game);
+			g->clear_flag = true;
 			SetKill();
 		}
 		break;
